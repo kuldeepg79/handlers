@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: True
+  tasks:
+    - copy:
+      content: "Hello world"
+      dest: /tmp/abc.txt
+...      
