@@ -5,4 +5,11 @@
     - copy:
       content: "Hello world"
       dest: /tmp/abc.txt
+
+  handlers:
+    - name: Restart apache
+      service:
+        name: httpd
+        state: restart
+        enabled: yes
 ...      
