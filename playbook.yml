@@ -2,16 +2,20 @@
 - hosts: all
   become: True
   tasks:
-    - name: Add content
+    - name: Install apache
+      yum:
+        name: httpd
+        state: present
+    - name: Copy content
       copy:
-        content: "Hello world"
-        dest: /tmp/abc.txt
-      notify: restart_apache
-
-  handlers:
-    - name: restart_apache
+        content: "hello world"
+        dest: /var/www/html/index.html
+        setype: httpd_sys_content_t
+      notify: apache_restart
+  handlers:    
+    - name: apache_restart
       service:
         name: httpd
         state: restarted
         enabled: yes
-...      
+...
